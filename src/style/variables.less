@@ -1,0 +1,71 @@
+@black1: rgb(55, 50, 45);
+@black2: rgb(75, 70, 65);
+@black3: rgb(95, 90, 85);
+@white1: rgb(255, 250, 245);
+@white2: rgb(235, 230, 225);
+@white3: rgb(215, 210, 205);
+.black-hover {
+    background-color: @black1;
+    color: @white1;
+    svg {
+        fill: @white1;
+    }
+    transition: 0.25s;
+    cursor: pointer;
+    user-select: none;
+    &:hover {
+        background-color: @black2;
+        svg {
+            fill: @white2;
+        }
+    }
+    &:active {
+        background-color: @black3;
+        svg {
+            fill: @white3;
+        }
+    }
+}
+
+.white-hover {
+    background-color: @white1;
+    color: @black1;
+    svg {
+        fill: @black1;
+    }
+    transition: 0.25s;
+    cursor: pointer;
+    user-select: none;
+    &:hover {
+        background-color: @white2;
+        svg {
+            fill: @black2;
+        }
+    }
+    &:active {
+        background-color: @white3;
+        svg {
+            fill: @black3;
+        }
+    }
+}
+
+.icon-button-black {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    user-select: none;
+    .black-hover;
+}
+
+.icon-button-white {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    user-select: none;
+    .white-hover;
+}
+
+.small-shadow {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25), 0 0 8px rgba(0, 0, 0, 0.125);
+}
