@@ -34,6 +34,13 @@
                     <th>
                         <div class="cell-inline">
                             <svg class="naked-icon-white" style="width:24px;height:24px" viewBox="0 0 24 24">
+                                <path d="M14,10H19.5L14,4.5V10M5,3H15L21,9V19A2,2 0 0,1 19,21H5C3.89,21 3,20.1 3,19V5C3,3.89 3.89,3 5,3M5,12V14H19V12H5M5,16V18H14V16H5Z" />
+                            </svg>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="cell-inline">
+                            <svg class="naked-icon-white" style="width:24px;height:24px" viewBox="0 0 24 24">
                                 <path d="M13,14H11V10H13M13,18H11V16H13M1,21H23L12,2L1,21Z" />
                             </svg>
                         </div>
@@ -84,7 +91,11 @@
                                 <svg class="naked-icon-black" style="width:24px;height:24px" viewBox="0 0 24 24" v-else-if="v.model.ua.includes('Googlebot')">
                                     <path d="M21.35,11.1H12.18V13.83H18.69C18.36,17.64 15.19,19.27 12.19,19.27C8.36,19.27 5,16.25 5,12C5,7.9 8.2,4.73 12.2,4.73C15.29,4.73 17.1,6.7 17.1,6.7L19,4.72C19,4.72 16.56,2 12.1,2C6.42,2 2.03,6.8 2.03,12C2.03,17.05 6.16,22 12.25,22C17.6,22 21.5,18.33 21.5,12.91C21.5,11.76 21.35,11.1 21.35,11.1V11.1Z" />
                                 </svg>
-                                <div v-else>{{v.model.os.name}}</div>
+                                <div v-else>
+                                    <span v-if="v.model.os.name!=='undefined'">
+                                        {{v.model.os.name}}
+                                    </span>
+                                </div>
                             </template>
                             <template>
                                 <svg class="naked-icon-black" style="width:24px;height:24px" viewBox="0 0 24 24" v-if="v.model.browser.name==='Chrome'">
@@ -103,12 +114,28 @@
                                     <svg class="naked-icon-black" style="width:24px;height:24px" viewBox="0 0 24 24" v-else-if="v.model.ua.includes('BingPreview')">
                                         <path d="M5,3V19L8.72,21L18,15.82V11.73H18L9.77,8.95L11.38,12.84L13.94,14L8.7,16.92V4.27L5,3" />
                                     </svg>
-                                    <div v-else>{{v.model.browser.name}}</div>
+                                    <div v-else>
+                                        <span v-if="v.model.browser.name!=='undefined'">
+                                            {{v.model.browser.name}}
+                                        </span>
+                                    </div>
                                 </template>
                             </template>
-                            <span v-if="v.model.device.vendor!=='Apple'">{{v.model.device.vendor}}</span>
-                            <span v-if="v.model.device.model!=='iPhone'">{{v.model.device.model}}</span>
-                            <span>{{v.model.os.version}}</span>
+                            <span v-if="v.model.device.vendor!=='Apple'&&v.model.device.vendor!=='undefined'">{{v.model.device.vendor}}</span>
+                            <span v-if="v.model.device.model!=='iPhone'&&v.model.device.model!=='undefined'">{{v.model.device.model}}</span>
+                            <span v-if="v.model.os.version!=='undefined'">{{v.model.os.version}}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="cell-inline">
+                            <div class="cell-inline">
+                                <div class="icon-button-black" title="Add Note" @click="addNote(v)">
+                                    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                        <path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" />
+                                    </svg>
+                                </div>
+                                <span>&nbsp;{{v.note}}</span>
+                            </div>
                         </div>
                     </td>
                     <td>
@@ -124,6 +151,7 @@
             </tbody>
         </table>
         <b-map :cord="cord" @closeMe="showMap=false" v-if="showMap" />
+        <note v-if="editing" v-model="nowEditingRecord.note" @update="updateNote" @kill="editing=false"></note>
     </div>
 </template>
 
@@ -131,16 +159,20 @@
     import UAParser from "ua-parser-js";
     import Time from "@/mixins/Time";
     import BMap from "@/components/BMap";
+    import Note from "@/components/Note";
 
     export default {
         name: 'Visitors',
         mixins: [Time],
         components: {
-            BMap
+            BMap,
+            Note
         },
         data() {
             return {
                 visitors: [],
+                nowEditingRecord: {},
+                editing: false
             }
         },
         methods: {
@@ -148,12 +180,18 @@
                 this.$http.get("listViewer").then(response => {
                     let data = response.body
                     data.forEach(item => {
-                        item.model = UAParser(item.model)
-                        if (item.lastLocation !== "Not Applied.") {
+                        if (typeof item.model === "string") {
+                            item.model = UAParser(item.model)
+                        }
+                        if (item.lastLocation !== "Not Applied." && typeof item.lastLocation !== "object") {
                             item.lastLocation = JSON.parse(item.lastLocation)
                         }
-                        item.order = Date.parse(item.time)
-                        item.time = this.formatTime(item.order)
+                        if (!item.order) {
+                            item.order = Date.parse(item.time)
+                        }
+                        if (item.time.length > 20) {
+                            item.time = this.formatTime(item.order)
+                        }
                     });
                     data.sort(function (a, b) {
                         return (b.order - a.order)
@@ -169,7 +207,18 @@
                 }, response => {
                     alert('FATAL ERROR')
                 });
-
+            },
+            addNote(record) {
+                this.nowEditingRecord = record
+                this.editing = true
+            },
+            updateNote() {
+                this.$http.post("editViewer", this.nowEditingRecord).then(response => {
+                    this.editing = false
+                    this.getViewers()
+                }, response => {
+                    alert('FATAL ERROR')
+                });
             }
         },
         mounted() {
