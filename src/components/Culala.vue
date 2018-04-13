@@ -67,6 +67,9 @@
                         fill: @white3;
                         flex-shrink: 0;
                     }
+                    .span-fixed {
+                        min-width: 40px;
+                    }
                 }
             }
         }

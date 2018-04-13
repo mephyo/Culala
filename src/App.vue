@@ -22,4 +22,8 @@
         font-size: 16px;
         color: @black1;
     }
+    svg {
+        width: 24px;
+        height: 24px;
+    }
 </style>
