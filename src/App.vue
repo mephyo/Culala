@@ -25,5 +25,6 @@
     svg {
         width: 24px;
         height: 24px;
+        display: block;
     }
 </style>

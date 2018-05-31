@@ -5,6 +5,7 @@
             <visitors v-if="activeTab === 'visitors'"></visitors>
             <locations v-if="activeTab === 'locations'"></locations>
             <appliers v-if="activeTab === 'appliers'"></appliers>
+            <contracts v-if="activeTab === 'contracts'"></contracts>
         </div>
     </div>
 </template>
@@ -14,6 +15,7 @@
     import Visitors from "@/components/Visitors";
     import Locations from "@/components/Locations";
     import Appliers from "@/components/Appliers";
+    import Contracts from "@/components/Contracts";
 
     export default {
         name: 'Culala',
@@ -21,7 +23,8 @@
             Switcher,
             Visitors,
             Locations,
-            Appliers
+            Appliers,
+            Contracts
         },
         data() {
             return {
