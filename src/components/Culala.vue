@@ -62,14 +62,6 @@
                 .cell-inline {
                     display: flex;
                     align-items: center;
-                    .naked-icon-black {
-                        fill: @black3;
-                        flex-shrink: 0;
-                    }
-                    .naked-icon-white {
-                        fill: @white3;
-                        flex-shrink: 0;
-                    }
                     .span-fixed {
                         min-width: 40px;
                     }

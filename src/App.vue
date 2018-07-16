@@ -18,13 +18,9 @@
 <style lang="less">
     @import "style/variables.less";
     body {
-        font-family: Calibri, sans-serif;
-        font-size: 16px;
+        font-family: 'Segoe UI', 'Microsoft Yahei', sans-serif;
+        font-size: 14px;
+        font-weight: 500;
         color: @black1;
-    }
-    svg {
-        width: 24px;
-        height: 24px;
-        display: block;
     }
 </style>
