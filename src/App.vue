@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <culala/>
+        <culala />
     </div>
 </template>
 
@@ -17,10 +17,19 @@
 
 <style lang="less">
     @import "style/variables.less";
+
     body {
-        font-family: 'Segoe UI', 'Microsoft Yahei', sans-serif;
+        font-family: 'Calibri', 'Microsoft Yahei', sans-serif;
         font-size: 14px;
-        font-weight: 500;
-        color: @black1;
+        font-weight: 400;
+        color: @greyMain;
+        background-color: @greyFont;
+        margin: 0;
+    }
+    a {
+        color: @greyMain;
+        &:visited {
+            color: #78909C;
+        }
     }
 </style>

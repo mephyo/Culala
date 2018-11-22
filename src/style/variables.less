@@ -4,48 +4,42 @@
 @white1: rgb(255, 250, 245);
 @white2: shade(@white1, 12.5%);
 @white3: shade(@white1, 25%);
+
+@greyFont: #263238; //900
+@greyLine: #37474f; //800
+@greyMain: #b0bec5; //200
+@greyBg: #cfd8dc; //100
+
 .black-hover {
-    background-color: @black1;
-    color: @white1;
+    background-color: @greyFont;
+    color: @greyMain;
     svg {
-        fill: @white1;
+        fill: @greyMain;
     }
     transition: 0.25s;
     cursor: pointer;
     user-select: none;
     &:hover {
-        background-color: @black2;
+        background-color: @greyLine;
         svg {
-            fill: @white2;
-        }
-    }
-    &:active {
-        background-color: @black3;
-        svg {
-            fill: @white3;
+            fill: @greyBg;
         }
     }
 }
 
 .white-hover {
-    background-color: @white1;
-    color: @black1;
+    background-color: @greyMain;
+    color: @greyFont;
     svg {
-        fill: @black1;
+        fill: @greyFont;
     }
     transition: 0.25s;
     cursor: pointer;
     user-select: none;
     &:hover {
-        background-color: @white2;
+        background-color: @greyBg;
         svg {
-            fill: @black2;
-        }
-    }
-    &:active {
-        background-color: @white3;
-        svg {
-            fill: @black3;
+            fill: @greyLine;
         }
     }
 }

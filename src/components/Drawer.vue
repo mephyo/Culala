@@ -52,12 +52,12 @@
     }
 
     .icon-black {
-        fill: @black3;
+        fill: @greyMain;
         flex-shrink: 0;
     }
 
     .icon-white {
-        fill: @white3;
+        fill: @greyLine;
         flex-shrink: 0;
     }
 </style>

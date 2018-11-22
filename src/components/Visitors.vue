@@ -11,7 +11,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="v in visitors" :key="v._id">
+                <tr v-for="(v, index) in visitors" :key="v._id" :class="{'dead': v.dead}">
                     <td>
                         <div class="cell-inline">
                             <span>{{v.viewTimes}}</span>
@@ -74,6 +74,9 @@
                         </div>
                     </td>
                     <td>
+                        <div class="cell-inline cell-fix" v-if="v.navigator && v.navigator.url" :title="v.navigator.url">{{v.navigator.url}}</div>
+                    </td>
+                    <td>
                         <div class="cell-inline">
                             <div class="icon-button-black" title="Add Note" @click="addNote(v)">
                                 <drawer d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" />
@@ -83,7 +86,7 @@
                     </td>
                     <td>
                         <div class="cell-inline">
-                            <div class="icon-button-black" @click="deleteMe(v._id)" title="Delete This Record">
+                            <div class="icon-button-black" @click="deleteMe(v._id, index)" title="Delete This Record">
                                 <drawer d="clear" />
                             </div>
                         </div>
@@ -120,6 +123,7 @@
                     "M15,19L9,16.89V5L15,7.11M20.5,3C20.44,3 20.39,3 20.34,3L15,5.1L9,3L3.36,4.9C3.15,4.97 3,5.15 3,5.38V20.5A0.5,0.5 0 0,0 3.5,21C3.55,21 3.61,21 3.66,20.97L9,18.9L15,21L20.64,19.1C20.85,19 21,18.85 21,18.62V3.5A0.5,0.5 0 0,0 20.5,3Z",
                     "M22,17H18V10H22M23,8H17A1,1 0 0,0 16,9V19A1,1 0 0,0 17,20H23A1,1 0 0,0 24,19V9A1,1 0 0,0 23,8M4,6H22V4H4A2,2 0 0,0 2,6V17H0V20H14V17H4V6Z",
                     "M13,4.2V3C13,2.4 12.6,2 12,2V4.2C9.8,4.6 9,5.7 9,7C9,7.8 9.3,8.5 9.8,9L4,19.9V22L6.2,20L11.6,10C11.7,10 11.9,10 12,10C13.7,10 15,8.7 15,7C15,5.7 14.2,4.6 13,4.2M12.9,7.5C12.7,7.8 12.4,8 12,8C11.4,8 11,7.6 11,7C11,6.8 11.1,6.7 11.1,6.5C11.3,6.2 11.6,6 12,6C12.6,6 13,6.4 13,7C13,7.2 12.9,7.3 12.9,7.5M20,19.9V22H20L17.8,20L13.4,11.8C14.1,11.6 14.7,11.3 15.2,10.9L20,19.9Z",
+                    'M16,6H13V7.9H16C18.26,7.9 20.1,9.73 20.1,12A4.1,4.1 0 0,1 16,16.1H13V18H16A6,6 0 0,0 22,12C22,8.68 19.31,6 16,6M3.9,12C3.9,9.73 5.74,7.9 8,7.9H11V6H8A6,6 0 0,0 2,12A6,6 0 0,0 8,18H11V16.1H8C5.74,16.1 3.9,14.26 3.9,12M8,13H16V11H8V13Z',
                     "M14,10H19.5L14,4.5V10M5,3H15L21,9V19A2,2 0 0,1 19,21H5C3.89,21 3,20.1 3,19V5C3,3.89 3.89,3 5,3M5,12V14H19V12H5M5,16V18H14V16H5Z",
                     "M13,14H11V10H13M13,18H11V16H13M1,21H23L12,2L1,21Z"
                 ],
@@ -151,11 +155,13 @@
                     this.visitors = data
                 })
             },
-            deleteMe(id) {
+            deleteMe(id, index) {
                 this.$http.post("delViewer", {
                     id: id
                 }).then(response => {
-                    this.getViewers()
+                    let zombie = this.visitors[index]
+                    zombie.dead = true
+                    this.$set(this.visitors, index, zombie)
                 }, response => {
                     alert('FATAL ERROR')
                 });

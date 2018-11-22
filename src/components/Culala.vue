@@ -36,35 +36,51 @@
 
 <style lang="less">
     @import "../style/variables.less";
+
     .table-wrapper {
-        margin: 8px 8px 8px 46px;
+        margin: 46px 0 0 0;
+
         table {
             width: 100%;
             border-collapse: collapse;
-            border: 1px solid @white3;
-            color: @black1;
+            border: 1px solid @greyLine;
+
             tbody tr {
                 &:nth-child(odd) {
-                    background-color: @white1;
+                    background-color: @greyLine;
                 }
 
                 &:nth-child(even) {
-                    background-color: @white2;
+                    background-color: @greyFont;
                 }
+
                 &:hover {
-                    background-color: @white3;
+                    background-color: #455A64;
+                }
+
+                &.dead {
+                    opacity: 0;
                 }
             }
+
             th,
             td {
-                border: 1px solid @white3;
                 min-width: 24px;
+
                 .cell-inline {
                     display: flex;
                     align-items: center;
+
                     .span-fixed {
                         min-width: 40px;
                     }
+                }
+
+                .cell-fix {
+                    max-width: 160px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
                 }
             }
         }

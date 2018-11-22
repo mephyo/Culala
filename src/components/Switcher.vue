@@ -57,7 +57,6 @@
         .switcher-group {
             .small-shadow;
             display: flex;
-            flex-direction: column;
             margin: 0;
             padding: 0;
             border-radius: 4px;
@@ -69,9 +68,6 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                &:first-child {
-                    border-top: none;
-                }
                 &.active {
                     .black-hover;
                 }

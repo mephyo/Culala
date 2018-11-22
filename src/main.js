@@ -1,21 +1,18 @@
 import Vue from 'vue'
-import App from './App'
+import App from './App.vue'
 import VueResource from 'vue-resource'
 import BaiduMap from 'vue-baidu-map'
-import 'normalize.css'
 
 Vue.config.productionTip = false
 
 Vue.use(VueResource)
 Vue.use(BaiduMap, {
-    ak: 'c7xZOiY52zDHyFyIrhPdVCPmgMCrXuoN'
+	ak: 'c7xZOiY52zDHyFyIrhPdVCPmgMCrXuoN'
 })
 
 Vue.http.options.root = 'https://camera-dev-cavallo.herokuapp.com/'
 Vue.http.options.emulateJSON = true;
 
-/* eslint-disable no-new */
 new Vue({
-    el: '#app',
-    render: h => h(App)
-})
+	render: h => h(App)
+}).$mount('#app')
