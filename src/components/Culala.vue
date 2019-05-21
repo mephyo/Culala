@@ -2,10 +2,11 @@
     <div class="culala">
         <switcher v-model="activeTab"></switcher>
         <div class="table-wrapper">
-            <visitors v-if="activeTab === 'visitors'"></visitors>
-            <locations v-if="activeTab === 'locations'"></locations>
-            <appliers v-if="activeTab === 'appliers'"></appliers>
-            <contracts v-if="activeTab === 'contracts'"></contracts>
+            <visitors v-if="activeTab === 'visitors'" />
+            <locations v-if="activeTab === 'locations'" />
+            <appliers v-if="activeTab === 'appliers'" />
+            <contracts v-if="activeTab === 'contracts'" />
+            <keeper v-if="activeTab === 'keeper'" />
         </div>
     </div>
 </template>
@@ -16,6 +17,7 @@
     import Locations from "@/components/Locations";
     import Appliers from "@/components/Appliers";
     import Contracts from "@/components/Contracts";
+    import Keeper from "@/components/Keeper";
 
     export default {
         name: 'Culala',
@@ -24,7 +26,8 @@
             Visitors,
             Locations,
             Appliers,
-            Contracts
+            Contracts,
+            Keeper
         },
         data() {
             return {

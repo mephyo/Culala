@@ -35,6 +35,10 @@
                     {
                         name: "contracts",
                         icon: "M17,3H7A2,2 0 0,0 5,5V21L12,18L19,21V5C19,3.89 18.1,3 17,3Z"
+                    },
+                    {
+                        name: "keeper",
+                        icon: "M12,7.77L18.39,18H5.61L12,7.77M12,4L2,20H22"
                     }
                 ]
             }
@@ -54,6 +58,7 @@
         position: fixed;
         top: 8px;
         left: 8px;
+
         .switcher-group {
             .small-shadow;
             display: flex;
@@ -61,6 +66,7 @@
             padding: 0;
             border-radius: 4px;
             overflow: hidden;
+
             .switcher {
                 .white-hover;
                 height: 30px;
@@ -68,6 +74,7 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
+
                 &.active {
                     .black-hover;
                 }
