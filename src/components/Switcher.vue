@@ -55,9 +55,8 @@
     @import "../style/variables.less";
 
     .switcher-wrapper {
-        position: fixed;
-        top: 8px;
-        left: 8px;
+        display: inline-block;
+        margin: 8px;
 
         .switcher-group {
             .small-shadow;

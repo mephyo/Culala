@@ -7,16 +7,16 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
-    "ua-parser-js": "^0.7.18",
-    "vue": "^2.5.17",
+    "ua-parser-js": "^0.7.21",
+    "vue": "^2.6.11",
     "vue-baidu-map": "^0.21.13",
     "vue-resource": "^1.5.1"
   },
   "devDependencies": {
-    "@vue/cli-service": "^3.0.5",
-    "less": "^3.0.4",
+    "@vue/cli-service": "^4.3.1",
+    "less": "^3.11.1",
     "less-loader": "^4.1.0",
-    "vue-template-compiler": "^2.5.17"
+    "vue-template-compiler": "^2.6.11"
   },
   "postcss": {
     "plugins": {

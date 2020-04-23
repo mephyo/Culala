@@ -16,22 +16,11 @@
 </script>
 
 <style lang="less">
-    @import "style/variables.less";
-
     body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-family: 'Segoe UI', 'Helvetica Neue', 'Source Han Sans', 'Microsoft Yahei', sans-serif;
         font-size: 14px;
         font-weight: 400;
-        color: @greyMain;
-        background-color: @greyFont;
+        color: #333;
         margin: 0;
-    }
-
-    a {
-        color: @greyMain;
-
-        &:visited {
-            color: #78909C;
-        }
     }
 </style>

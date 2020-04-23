@@ -41,26 +41,12 @@
     @import "../style/variables.less";
 
     .table-wrapper {
-        margin: 46px 0 0 0;
 
         table {
             width: 100%;
             border-collapse: collapse;
-            border: 1px solid @greyLine;
 
             tbody tr {
-                &:nth-child(odd) {
-                    background-color: @greyLine;
-                }
-
-                &:nth-child(even) {
-                    background-color: @greyFont;
-                }
-
-                &:hover {
-                    background-color: #455A64;
-                }
-
                 &.dead {
                     opacity: 0;
                 }
