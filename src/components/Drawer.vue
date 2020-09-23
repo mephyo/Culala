@@ -41,23 +41,3 @@
         }
     }
 </script>
-
-<style lang="less">
-    @import "../style/variables.less";
-
-    .icon {
-        width: 24px;
-        height: 24px;
-        display: block;
-    }
-
-    .icon-black {
-        fill: @greyMain;
-        flex-shrink: 0;
-    }
-
-    .icon-white {
-        fill: @greyLine;
-        flex-shrink: 0;
-    }
-</style>

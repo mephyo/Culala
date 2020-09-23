@@ -1,0 +1,236 @@
+@greyFont: #263238; //900
+@greyLine: #37474f; //800
+@greyMain: #b0bec5; //200
+@greyBg: #cfd8dc; //100
+
+.black-hover {
+    background-color: @greyFont;
+    color: @greyMain;
+
+    svg {
+        fill: @greyMain;
+    }
+
+    transition: 0.25s;
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+        background-color: @greyLine;
+
+        svg {
+            fill: @greyBg;
+        }
+    }
+}
+
+.white-hover {
+    background-color: @greyMain;
+    color: @greyFont;
+
+    svg {
+        fill: @greyFont;
+    }
+
+    transition: 0.25s;
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+        background-color: @greyBg;
+
+        svg {
+            fill: @greyLine;
+        }
+    }
+}
+
+.icon-button-black {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    user-select: none;
+    .black-hover;
+}
+
+.icon-button-white {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    user-select: none;
+    .white-hover;
+}
+
+.small-shadow {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25), 0 0 8px rgba(0, 0, 0, 0.125);
+}
+
+// variables above
+
+body {
+    font-family: 'Segoe UI', 'Seravek', 'Helvetica Neue', 'Source Han Sans', 'Microsoft Yahei', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: @greyFont;
+    margin: 0;
+    text-rendering: geometricPrecision;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    display: block;
+}
+
+.icon-black {
+    fill: @greyMain;
+    flex-shrink: 0;
+}
+
+.icon-white {
+    fill: @greyLine;
+    flex-shrink: 0;
+}
+
+
+.note-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.25);
+
+    .note-main {
+        .small-shadow;
+        background-color: @greyBg;
+        border-radius: 4px;
+        box-sizing: border-box;
+        overflow: hidden;
+
+        textarea {
+            resize: none;
+            display: block;
+            width: 480px;
+            border: none;
+            outline: none;
+            background-color: @greyLine;
+            color: @greyMain;
+            padding: 8px;
+        }
+
+        .button-group-h {
+            display: flex;
+
+            .note-button {
+                margin: 8px;
+            }
+        }
+    }
+}
+
+.switcher-wrapper {
+    display: inline-block;
+    position: sticky;
+    top: 8px;
+    left: 8px;
+    margin-bottom: 8px;
+
+    .switcher-group {
+        .small-shadow;
+        display: flex;
+        margin: 0;
+        padding: 0;
+        border-radius: 4px;
+        overflow: hidden;
+
+        .switcher {
+            .white-hover;
+            height: 30px;
+            width: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            &.active {
+                .black-hover;
+            }
+        }
+    }
+}
+
+.table-wrapper {
+    table {
+        width: 100%;
+        border-collapse: collapse;
+
+        tbody tr {
+            &.dead {
+                opacity: 0;
+            }
+
+            &:hover {
+                background-color: @greyBg;
+            }
+        }
+
+        th,
+        td {
+            min-width: 24px;
+
+            .cell-inline {
+                display: flex;
+                align-items: center;
+
+                .span-fixed {
+                    min-width: 40px;
+                }
+            }
+
+            .cell-fix {
+                max-width: 160px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+        }
+    }
+}
+
+.applier-list {
+    margin: 0;
+    padding: 0;
+
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    li {
+        display: flex;
+        border-top: 1px solid @greyLine;
+
+        &:first-child {
+            border-top: 0;
+        }
+
+        dl {
+            padding: 4px 8px;
+            border: 1px solid @greyMain;
+            flex-shrink: 0;
+            margin: 1px;
+
+            &:first-child {
+                display: none;
+            }
+
+            dt {
+                border-bottom: 1px solid @greyMain;
+                font-weight: 600;
+            }
+        }
+    }
+}

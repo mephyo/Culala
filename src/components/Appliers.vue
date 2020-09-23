@@ -48,29 +48,3 @@
         }
     }
 </script>
-
-<style lang="less">
-.applier-list {
-    margin: 0;
-    padding: 0;
-    * {
-        margin: 0;
-        padding: 0;
-    }
-    li {
-        display: flex;
-        dl {
-            padding: 4px 8px;
-            border: 1px solid #eee;
-            flex-shrink: 0;
-            &:first-child {
-                display: none;
-            }
-            dt {
-                border-bottom: 1px solid #eee;
-                font-weight: 600;
-            }
-        }
-    }
-}
-</style>

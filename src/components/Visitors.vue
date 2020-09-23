@@ -21,13 +21,7 @@
                     <td>{{v.time}}</td>
                     <td>
                         <div class="cell-inline">
-                            <drawer v-if="v.lastLocation==='Not Applied.'" c="b" d="M16.37,16.1L11.75,11.47L11.64,11.36L3.27,3L2,4.27L5.18,7.45C5.06,7.95 5,8.46 5,9C5,14.25 12,22 12,22C12,22 13.67,20.15 15.37,17.65L18.73,21L20,19.72M12,6.5A2.5,2.5 0 0,1 14.5,9C14.5,9.73 14.17,10.39 13.67,10.85L17.3,14.5C18.28,12.62 19,10.68 19,9A7,7 0 0,0 12,2C10,2 8.24,2.82 6.96,4.14L10.15,7.33C10.61,6.82 11.26,6.5 12,6.5Z" />
-                            <div class="icon-button-white" v-else @click="openMap(v.lastLocation)" title="Open Map">
-                                <drawer d="M12,11.5A2.5,2.5 0 0,1 9.5,9A2.5,2.5 0 0,1 12,6.5A2.5,2.5 0 0,1 14.5,9A2.5,2.5 0 0,1 12,11.5M12,2A7,7 0 0,0 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9A7,7 0 0,0 12,2Z" />
-                            </div>
-                            <span>
-                                <a target="_blank" :href="'https://www.ip138.com/iplookup.asp?ip=' + v.ip + '&action=2'">{{v.ip}}</a>
-                            </span>
+                            <a target="_blank" :href="'https://www.ip138.com/iplookup.asp?ip=' + v.ip + '&action=2'">{{v.ip}}</a>
                         </div>
                     </td>
                     <td :title="v.model.ua">
@@ -94,23 +88,18 @@
                 </tr>
             </tbody>
         </table>
-        <b-map :cord="cord" @closeMe="showMap=false" v-if="showMap" />
         <note v-if="editing" v-model="nowEditingRecord.note" @update="updateNote" @kill="editing=false"></note>
     </div>
 </template>
 
 <script>
     import UAParser from "ua-parser-js";
-    import Time from "@/mixins/Time";
-    import BMap from "@/components/BMap";
     import Note from "@/components/Note";
     import Drawer from "@/components/Drawer";
 
     export default {
         name: 'Visitors',
-        mixins: [Time],
         components: {
-            BMap,
             Note,
             Drawer
         },
@@ -149,7 +138,7 @@
                             item.time = this.formatTime(item.order)
                         }
                     });
-                    data.sort(function (a, b) {
+                    data.sort(function(a, b) {
                         return (b.order - a.order)
                     });
                     this.visitors = data
@@ -177,7 +166,27 @@
                 }, response => {
                     alert('FATAL ERROR')
                 });
-            }
+            },
+            formatTime(timeStr) {
+                const time = new Date(timeStr)
+                Date.prototype.Format = function(fmt) {
+                    var o = {
+                        "M+": this.getMonth() + 1, //月份
+                        "d+": this.getDate(), //日
+                        "h+": this.getHours(), //小时
+                        "m+": this.getMinutes(), //分
+                        "s+": this.getSeconds(), //秒
+                        "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+                        "S": this.getMilliseconds() //毫秒
+                    };
+                    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+                    for (var k in o)
+                        if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+                    return fmt;
+                }
+
+                return time.Format("hh:mm yyyy-MM-dd");
+            },
         },
         mounted() {
             this.getViewers()
