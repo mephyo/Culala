@@ -7,7 +7,7 @@
         "build": "vue-cli-service build --modern"
     },
     "dependencies": {
-        "ua-parser-js": "^0.7.22",
+        "ua-parser-js": "^0.7.24",
         "vue": "^2.6.12",
         "vue-resource": "^1.5.1"
     },
